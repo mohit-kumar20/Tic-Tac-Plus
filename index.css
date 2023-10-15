@@ -7,6 +7,7 @@ body {
     text-align: center;
     color: darkkhaki;
     font-size: 50px;
+    margin: 2% ;
 }
 
 .container {
@@ -26,6 +27,7 @@ body {
 #message {
     height: 40px;
     font-size: 30px;
+    margin: 5%;
 }
 
 #message b {
@@ -34,9 +36,9 @@ body {
 }
 
 .game-board {
-    height: 330px;
-    width: 330px;
-    background-color: #6ddef2;
+    height: 300px;
+    width: 300px;
+    background-color: #f3f6f7;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -56,21 +58,24 @@ body {
     color: black;
 }
 
+
 .box:hover {
-    background-color: rgba(255, 255, 255, 0.493);
+    background-color: rgba(255, 255, 255, 0.712);
 }
 
 #restart {
     padding: 2%;
-    margin: 5% 0;
+    margin: 10% 0;
     width: 50%;
     font-size: 20px;
-    border: 1px solid #D5DCF2;
+    border: 1px solid rgba(255, 255, 255, 0.712);
     font-family: 'Odibee Sans', cursive;
 }
 
 #restart:hover {
-    color: rgba(0, 0, 0, 0.486);
+    color: rgba(0, 0, 0, 0.836);
+    background-color: rgba(255, 255, 255);
+    cursor: pointer;
 }
 
 .input-Area div {
@@ -86,7 +91,7 @@ h3 {
 
 label {
     font-size: 25px;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
 }
 
 input {
@@ -100,12 +105,18 @@ input {
     text-transform: uppercase;
 }
 
-.input-Area button {
+button#start {
     width: 100px;
     font-size: 20px;
     padding: 2%;
-    border: 1px solid #D5DCF2;
+    border: 1px solid rgba(255, 255, 255, 0.712);
+    background-color: 1px solid rgba(255, 255, 255, 0.712);
     font-family: 'Odibee Sans', cursive;
+}
+
+button#start:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255);
 }
 
 @media only screen and (max-width: 1068px) {
