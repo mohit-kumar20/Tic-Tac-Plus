@@ -21,7 +21,7 @@ Welcome to the Tic-Tac-Toe Game repository! This project is a classic two-player
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/tic-tac-toe.git
+git clone https://github.com/mohit-kumar20/Tic-Tac-Toe.git
 ```
 2. Open the project folder:
 
