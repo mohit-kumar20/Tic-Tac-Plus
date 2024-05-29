@@ -1,4 +1,4 @@
-import { getAllWinningCombinations,playSound } from "./Utility.js";
+import { getAllWinningCombinations,playSound } from "../JS/Utility.js";
 
 //Setting Up Global Variables
 let playerX;
