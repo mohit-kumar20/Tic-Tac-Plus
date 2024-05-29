@@ -1,0 +1,131 @@
+
+
+body {
+    font-family: 'Odibee Sans', cursive;
+    min-height: 100vh;
+    height: max-content;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(100, 148, 237, 0.198); 
+}
+
+.container {
+    width: max-content;
+    min-width: 400px;
+    padding: 20px;
+    background: white; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.game-name {
+    text-align: center;
+    color: darkkhaki;
+    font-size: 50px;
+    margin: 2% ;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#user1,#user2, select,#proceed {
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: bolder;
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+    outline: none;
+    font-family: 'Odibee Sans', cursive;
+    color: #333;
+    background-color: #f5f5f5;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+}
+
+#user1,#user2 {
+width: 70%;
+font-size: 1.2em;
+} 
+
+select {
+    width: 40%;
+} 
+
+#proceed{
+    background-color: #007BFF !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer;
+    width: 40%;
+}
+
+#proceed:hover {
+    background-color: #0056b3;
+}
+
+label{
+ font-size: 1.4em;
+ color: rgba(0, 0, 0, 0.853);
+}
+
+#game-board {
+    background-color: #f3f6f7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin:auto;
+    width:80%;
+}
+
+.box {
+    border: 1px solid rgba(43, 189, 226, 0.15);
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bolder;
+    color: black;
+}
+
+.box:hover {
+    background-color: rgba(255, 255, 255, 0.712);
+}
+
+#restart {
+    padding: 2%;
+    margin: 10% 0;
+    width: 50%;
+    font-size: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.712);
+    font-family: 'Odibee Sans', cursive;
+}
+
+#restart:hover {
+    color: rgba(0, 0, 0, 0.836);
+    background-color: rgba(255, 255, 255);
+    cursor: pointer;
+}
+
+#gameStatus {
+    height: 40px;
+    font-size: 30px;
+    margin: 5%;
+} 
+
+#gameStatus b {
+    color: rgba(189, 183, 107, 0.808);
+    font-size: 36px;
+}

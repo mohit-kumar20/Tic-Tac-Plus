@@ -9,41 +9,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="CSS/index.css">
+    <script type="module" src="js/index.js"></script> 
 </head>
 
 <body>
-    <h1 class="game-name"> Tic-Tac-Toe</h1>
-    <div class="container" id="container">
-        <div>
-            <h5 id="message"></h5>
-            <div class="game-board" id="game-board">
-                <button class="box 1" value=1 onclick="clicked(event.target)"></button>
-                <button class="box 2" value=2 onclick="clicked(event.target)"></button>
-                <button class="box 3" value=3 onclick="clicked(event.target)"></button>
-                <button class="box 4" value=4 onclick="clicked(event.target)"></button>
-                <button class="box 5" value=5 onclick="clicked(event.target)"></button>
-                <button class="box 6" value=6 onclick="clicked(event.target)"></button>
-                <button class="box 7" value=7 onclick="clicked(event.target)"></button>
-                <button class="box 8" value=8 onclick="clicked(event.target)"></button>
-                <button class="box 9" value=9 onclick="clicked(event.target)"></button>
-            </div>
-            <button type="button" id="restart" onclick="restart()">Restart</button>
-        </div>
-        <div class="input-Area">
-            <h3>First enter your names</h3>
-            <div>
-                <label for="playerX">Player <b>X</b></label>
-                <input type="text" name="playerX" id="playerX" placeholder="enter player X..." autocomplete="off" onchange="getName()" onfocus="this.placeholder=''">
-            </div>
-            <div>
-                <label for="playerO">Player <b>O</b></label>
-                <input type="text" name="playerO" id="playerO" placeholder="enter player O..." autocomplete="off" onchange="getName()" onfocus="this.placeholder=''">
-            </div>
-            <button type="button" id="start" onclick="setName()">Start</button>
-        </div>
+    <div class="container" id="setupContainer">
+        <h1 class="game-name">Tic-Tac-Plus</h1>
+        <form id="setupForm">
+            <label for="user1">Player 1:</label>
+            <input type="text" id="user1" name="user1" required>
+            
+            <label for="user2">Player 2:</label>
+            <input type="text" id="user2" name="user2" required>
+
+            <label for="level">Choose Level:</label>
+            <select id="level" name="level" required>
+                <option value="3" selected>3x3</option>
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+                <option value="6">6x6</option>
+                <option value="7">7x7</option>
+                <option value="8">8x8</option>
+                <option value="9">9x9</option>
+            </select>
+
+            <button type="submit" id="proceed">Proceed</button>
+        </form>
     </div>
-    <script src="./index.js"></script>
+    <div class="container" id="gameContainer" style="display: none;" >
+            <h5 id="gameStatus"></h5>
+            <div class="game-board" id="game-board">
+            </div>
+            <button type="button" id="restart">Restart</button>
+    </div>  
+     
 </body>
 
 </html>
