@@ -30,7 +30,7 @@ function getAllWinningCombinations(level)
 }
 
 function playSound(type) {
-    let audio = new Audio(`../Resources/Sounds/${type}.mp3`);
+    let audio = new Audio(`../STATIC/SOUNDS/${type}.mp3`);
     audio.play();
 }
 

@@ -1,4 +1,4 @@
-import { getAllWinningCombinations,playSound } from "../JS/Utility.js";
+import { getAllWinningCombinations,playSound} from "./Utility.js";
 
 //Setting Up Global Variables
 let playerX;
@@ -182,8 +182,6 @@ function highlightWinningCombination(combination)
         box[0].style.color = '#9FE649';
     }
 }
-
-
 
 
 
