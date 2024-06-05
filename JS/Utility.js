@@ -34,4 +34,11 @@ function playSound(type) {
     audio.play();
 }
 
-export {getAllWinningCombinations,playSound};
+function updateSessionStorage(obj)
+{
+    sessionStorage.setItem('ticTacPlusGameState',JSON.stringify(obj));
+}
+
+
+
+export {getAllWinningCombinations,playSound,updateSessionStorage};

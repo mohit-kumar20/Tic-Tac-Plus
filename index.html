@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <title>Tic-Tac-Plus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
@@ -16,33 +16,29 @@
     <div class="container" id="setupContainer">
         <h1 class="game-name">Tic-Tac-Plus</h1>
         <form id="setupForm">
-            <label for="user1">Player 1:</label>
-            <input type="text" id="user1" name="user1" required>
+            <div class="radio-group">               
+                <input type="radio" id="auto-player" name="game-mode" value="auto-player" title="Auto Player" checked>
+                <label for="auto-player">Auto Player</label>
+                <input type="radio" id="two-player" name="game-mode" value="two-player" title="2 Player">
+                <label for="two-player">2 Player</label>
+            </div>
+
+            <label for="player1">Player 1:</label>
+            <input type="text" id="player1" name="player1" required>
             
-            <label for="user2">Player 2:</label>
-            <input type="text" id="user2" name="user2" required>
+            <label for="player2">Player 2:</label>
+            <input type="text" id="player2" name="player2" required>
 
             <label for="level">Choose Level:</label>
             <select id="level" name="level" required>
                 <option value="3" selected>3x3</option>
                 <option value="4">4x4</option>
                 <option value="5">5x5</option>
-                <option value="6">6x6</option>
-                <option value="7">7x7</option>
-                <option value="8">8x8</option>
-                <option value="9">9x9</option>
             </select>
 
             <button type="submit" id="proceed">Proceed</button>
         </form>
     </div>
-    <div class="container" id="gameContainer" style="display: none;" >
-            <h5 id="gameStatus"></h5>
-            <div class="game-board" id="game-board">
-            </div>
-            <button type="button" id="restart">Restart</button>
-    </div>  
-     
     <script type="module" src="JS/index.js"></script> 
 </body>
 
