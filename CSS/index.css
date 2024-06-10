@@ -14,7 +14,7 @@ body {
 .container {
     width: max-content;
     min-width: 400px;
-    padding: 20px;
+    padding: 18px;
     background: white; 
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
@@ -26,14 +26,14 @@ body {
 .game-name {
     text-align: center;
     color: darkkhaki;
-    font-size: 50px;
+    font-size: 46px;
     margin: 2% ;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 9px;
     align-items: center;
 }
 
@@ -55,7 +55,7 @@ form {
 
 
 #player1,#player2, select,#proceed {
-    padding: 0.5em;
+    padding: 0.4em;
     font-size: 1em;
     font-weight: bolder;
     border-radius: 5px; 
@@ -89,6 +89,7 @@ select {
 
 #proceed:hover {
     background-color: #0056b3;
+    transform: scale(1.08);
 }
 
 label{
@@ -146,4 +147,94 @@ label{
 #gameStatus b {
     color: rgba(189, 183, 107, 0.808);
     font-size: 36px;
+}
+
+
+.toss-result {
+    margin-top: 2%;
+    font-size: 1.5em;
+    color: rgba(189, 183, 107, 0.808);
+}
+
+.coin {
+    width: 60px;
+    height: 60px;
+    margin: 1%;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: transform 1s;
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.heads {
+    background-color: gold;
+    transform: rotateY(0deg);
+}
+
+.tails {
+    background-color: silver;
+    transform: rotateY(180deg);
+}
+
+#tossButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#tossButton:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#tossButton:active {
+    background-color: #3e8e41;
+    transform: scale(0.95);
+}
+
+#tossButton::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    /* left: 50%; */
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#tossButton:hover::after {
+    opacity: 1;
+}
+
+
+.toss-winner {
+    color: #333; /* Highlight color for winner */
+    font-weight: bold;
 }

@@ -9,6 +9,8 @@ let winningCombinations = [];
 let positionsOfX = [];
 let positionsOfO = [];
 let currentPlayer;
+let autoPlayer='';
+let tossWinner = '';
 let maxDepth = {
     '3': 8,
     '4': 5,
@@ -23,6 +25,20 @@ setUpGameBoard();
 updateEntriesInGameBoard();
 
 
+function autoPlayerAsFirstMover()
+{
+    if(currentPlayer==='X' && autoPlayer==='X')
+        getAImove();
+    else if(currentPlayer==='O' && autoPlayer==='O')
+        getAImove();
+}
+
+if(gameMode=='auto-player')
+{
+   autoPlayerAsFirstMover();
+}
+
+
 restartButton.addEventListener('click', (event) => {
     positionsOfX.length = 0;
     positionsOfO.length = 0;
@@ -35,6 +51,8 @@ restartButton.addEventListener('click', (event) => {
         boxes[i].disabled = false;
     }
     updatePositionsOfPlayersInSessionStorage(positionsOfX, positionsOfO);
+    if(gameMode=='auto-player')
+        autoPlayerAsFirstMover();
 });
 
 
@@ -62,7 +80,7 @@ function boxClicked(selectedBox) {
     currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
     status.innerHTML = `<b>${(currentPlayer === 'X') ? playerX : playerO}</b>'s turn`;
 
-    if ((gameMode === 'auto-player') && (currentPlayer === 'O')) {
+    if ((gameMode === 'auto-player') && (currentPlayer === autoPlayer)) {
         setTimeout(()=>{getAImove()},1000);
     }
 }
@@ -100,14 +118,22 @@ function highlightWinningCombination(combination) {
 function bindGameStateFromSessionStorage() {
     if (sessionStorage.getItem('ticTacPlusGameState') !== null) {
         const state = JSON.parse(sessionStorage.getItem('ticTacPlusGameState'));
-        playerX = state.playerX;
-        playerO = state.playerO !== '' ? state.playerO : 'Auto Player';
+        playerX=state.tossWinner;
+        playerO=state.player1==state.tossWinner?state.player2:state.player1;
         level = state.boardDimension;
         gameMode = state.gameMode;
-        positionsOfX = state.playerXPositions;
-        positionsOfO = state.playerOPositions;
+        tossWinner= state.tossWinner;
+        positionsOfX = state.tossWinner === state.player1 ?state.player1Positions : state.player2Positions;
+        positionsOfO = state.tossWinner === state.player1 ?state.player2Positions : state.player1Positions;
         currentPlayer = positionsOfX.length === positionsOfO.length ? 'X' : 'O';
         winningCombinations = getAllWinningCombinations(level);
+        if(gameMode==='auto-player')
+        {
+            if(playerX==='Auto-Player')
+                autoPlayer='X';
+            else
+                autoPlayer='O';
+        }
         status.innerHTML = `<b>${currentPlayer == 'X' ? playerX : playerO}</b>'s turn`;
     }
     else {
@@ -175,7 +201,9 @@ function updateStyleOfEntry(selectedBox) {
 function updatePositionsOfPlayersInSessionStorage(positionsOfX, positionsOfO) {
     if (sessionStorage.getItem('ticTacPlusGameState') !== null) {
         let obj = JSON.parse(sessionStorage.getItem('ticTacPlusGameState'));
-        obj = { ...obj, playerXPositions: positionsOfX, playerOPositions: positionsOfO }
+        obj = { ...obj, 
+            player1Positions: tossWinner === playerX?positionsOfX:positionsOfO, 
+            player2Positions: tossWinner === playerX?positionsOfO:positionsOfX }
         sessionStorage.setItem('ticTacPlusGameState', JSON.stringify(obj));
     }
 }
@@ -188,14 +216,14 @@ function getAImove() {
 
     let bestScore = Number.NEGATIVE_INFINITY;
     let bestMoves = [];
-
     for (let i = 1; i <= level; i++) {
         for (let j = 1; j <= level; j++) {
             let move = i + '' + j;
-            if (!positionsOfX.includes(move) && !positionsOfO.includes(move)) {
-                positionsOfO.push(move);
-                let score = minimax(0, false, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
-                positionsOfO.pop();
+            if (!positionsOfX.includes(move) && !positionsOfO.includes(move)) 
+            {
+                autoPlayer==='X'? positionsOfX.push(move) : positionsOfO.push(move);
+                let score = minimax(0, false, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);  
+                autoPlayer==='X'? positionsOfX.pop(move) : positionsOfO.pop(move);              
                 if (score > bestScore) {
                     bestScore = score;
                     bestMoves = [move];
@@ -210,7 +238,6 @@ function getAImove() {
 
     if (bestMoves.length>0) {
         let bestMove= bestMoves[Math.floor(Math.random()*bestMoves.length)];
-        console.log('best move ' + bestMove)
         let aiSelectedBox = document.querySelector(`button[value="${bestMove}"]`);
         aiSelectedBox.click();
     }
@@ -218,10 +245,10 @@ function getAImove() {
 
 function minimax(depth, isMaximizer, alpha, beta) {
 
-    if (isWinner('O')) {
+    if (isWinner(autoPlayer)) {
         return 10 - depth;
     }
-    if (isWinner('X')) {
+    if (isWinner(autoPlayer==='X'?'O':'X')) {
         return depth - 10;
     }
     if (isBoardFull(true) || depth>=maxDepth[level]) {
@@ -234,9 +261,9 @@ function minimax(depth, isMaximizer, alpha, beta) {
             for (let j = 1; j <= level; j++) {
                 let move = i + '' + j;
                 if (!positionsOfX.includes(move) && !positionsOfO.includes(move)) {
-                    positionsOfO.push(move);
+                    (autoPlayer==='X')? positionsOfX.push(move) : positionsOfO.push(move);
                     let score = minimax(depth + 1, false, alpha, beta);
-                    positionsOfO.pop();
+                    (autoPlayer==='X')? positionsOfX.pop() : positionsOfO.pop();
                     bestScore = Math.max(score, bestScore);
                     alpha = Math.max(alpha, bestScore);
                     if (beta <= alpha) {
@@ -252,9 +279,9 @@ function minimax(depth, isMaximizer, alpha, beta) {
             for (let j = 1; j <= level; j++) {
                 let move = i + '' + j;
                 if (!positionsOfX.includes(move) && !positionsOfO.includes(move)) {
-                    positionsOfX.push(move);
+                    (autoPlayer!=='X')? positionsOfX.push(move) : positionsOfO.push(move);
                     let score = minimax(depth + 1, true, alpha, beta);
-                    positionsOfX.pop();
+                    (autoPlayer!=='X')? positionsOfX.pop() : positionsOfO.pop();
                     bestScore = Math.min(score, bestScore);
                     beta = Math.min(beta, bestScore);
                     if (beta <= alpha) {
